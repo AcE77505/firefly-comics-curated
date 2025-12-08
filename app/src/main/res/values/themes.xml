@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.流萤" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="chipStyle">@style/Widget.Firefly.Chip</item>
+        <item name="chipStandaloneStyle">@style/Widget.Firefly.Chip</item>
+    </style>
+
+    <style name="Theme.流萤" parent="Base.Theme.流萤" />
+    <style name="Widget.Firefly.Chip" parent="Widget.Material3.Chip.Assist">
+        <item name="chipStrokeColor">@color/chip_stroke_color</item>
+        <item name="chipStrokeWidth">2dp</item>
+    </style>
+
+    <!-- Chip stroke color selector -->
+    <color name="chip_stroke_color">@color/chip_stroke_selector</color>
+</resources>
