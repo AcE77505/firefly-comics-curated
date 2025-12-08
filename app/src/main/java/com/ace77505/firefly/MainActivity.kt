@@ -2,7 +2,6 @@
 package com.ace77505.firefly
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -18,6 +17,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import androidx.core.net.toUri
 
 class MainActivity : AppCompatActivity() {
 
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     private fun openUrlInBrowser(id: String) {
         try {
             val url = "https://jm18c-ghj.cc/album/$id"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            val intent = Intent(Intent.ACTION_VIEW, url.toUri())
 
             // 检查是否有浏览器可以处理这个Intent
             if (intent.resolveActivity(packageManager) != null) {
@@ -128,17 +128,17 @@ class MainActivity : AppCompatActivity() {
         etSearch.setText(currentSearchText)
 
         // 设置当前选中的筛选条件 - 明确指定泛型类型
-        setChipSelection<Int>(dialogView, R.id.chipGroupRecommend, currentSelectedRecommend, mapOf(
+        setChipSelection(dialogView, currentSelectedRecommend, mapOf(
             R.id.chipRecommendYes to 1,
             R.id.chipRecommendNo to 0
         ))
 
-        setChipSelection<Int>(dialogView, R.id.chipGroupFilter1, currentSelectedFilter1, mapOf(
+        setChipSelection(dialogView, currentSelectedFilter1, mapOf(
             R.id.chipFilter1Yes to 1,
             R.id.chipFilter1No to 0
         ))
 
-        setChipSelection<String>(dialogView, R.id.chipGroupFilter2, currentSelectedFilter2, mapOf(
+        setChipSelection(dialogView, currentSelectedFilter2, mapOf(
             R.id.chipFilter2Unknown to "-1",
             R.id.chipFilter2None to "0",
             R.id.chipFilter2Light to "1",
@@ -147,19 +147,19 @@ class MainActivity : AppCompatActivity() {
             R.id.chipFilter2Complete to "4"
         ))
 
-        setChipSelection<Int>(dialogView, R.id.chipGroupFilter3, currentSelectedFilter3, mapOf(
+        setChipSelection(dialogView, currentSelectedFilter3, mapOf(
             R.id.chipFilter3Unknown to -1,
             R.id.chipFilter3Yes to 1,
             R.id.chipFilter3No to 0
         ))
 
-        setChipSelection<Int>(dialogView, R.id.chipGroupFilter4, currentSelectedFilter4, mapOf(
+        setChipSelection(dialogView, currentSelectedFilter4, mapOf(
             R.id.chipFilter4Unknown to -1,
             R.id.chipFilter4Yes to 1,
             R.id.chipFilter4No to 0
         ))
 
-        setChipSelection<String>(dialogView, R.id.chipGroupFilter5, currentSelectedFilter5, mapOf(
+        setChipSelection(dialogView, currentSelectedFilter5, mapOf(
             R.id.chipFilter5Unknown to "-1",
             R.id.chipFilter5Type1 to "1",
             R.id.chipFilter5Type2 to "2",
@@ -181,11 +181,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun <T> setChipSelection(
         dialogView: View,
-        chipGroupId: Int,
         selectedValues: Set<T>?,
         chipMap: Map<Int, T>
     ) {
-        val chipGroup = dialogView.findViewById<ChipGroup>(chipGroupId)
         selectedValues?.let { values ->
             for ((chipId, value) in chipMap) {
                 val chip = dialogView.findViewById<Chip>(chipId)
@@ -216,22 +214,22 @@ class MainActivity : AppCompatActivity() {
     private fun applyFiltersFromDialog(dialogView: View, searchText: String) {
         currentSearchText = searchText
 
-        currentSelectedRecommend = getSelectedChipValues<Int>(
-            dialogView, R.id.chipGroupRecommend, mapOf(
+        currentSelectedRecommend = getSelectedChipValues(
+            dialogView, mapOf(
                 R.id.chipRecommendYes to 1,
                 R.id.chipRecommendNo to 0
             )
         )
 
-        currentSelectedFilter1 = getSelectedChipValues<Int>(
-            dialogView, R.id.chipGroupFilter1, mapOf(
+        currentSelectedFilter1 = getSelectedChipValues(
+            dialogView, mapOf(
                 R.id.chipFilter1Yes to 1,
                 R.id.chipFilter1No to 0
             )
         )
 
-        currentSelectedFilter2 = getSelectedChipValues<String>(
-            dialogView, R.id.chipGroupFilter2, mapOf(
+        currentSelectedFilter2 = getSelectedChipValues(
+            dialogView, mapOf(
                 R.id.chipFilter2Unknown to "-1",
                 R.id.chipFilter2None to "0",
                 R.id.chipFilter2Light to "1",
@@ -241,24 +239,24 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        currentSelectedFilter3 = getSelectedChipValues<Int>(
-            dialogView, R.id.chipGroupFilter3, mapOf(
+        currentSelectedFilter3 = getSelectedChipValues(
+            dialogView, mapOf(
                 R.id.chipFilter3Unknown to -1,
                 R.id.chipFilter3Yes to 1,
                 R.id.chipFilter3No to 0
             )
         )
 
-        currentSelectedFilter4 = getSelectedChipValues<Int>(
-            dialogView, R.id.chipGroupFilter4, mapOf(
+        currentSelectedFilter4 = getSelectedChipValues(
+            dialogView, mapOf(
                 R.id.chipFilter4Unknown to -1,
                 R.id.chipFilter4Yes to 1,
                 R.id.chipFilter4No to 0
             )
         )
 
-        currentSelectedFilter5 = getSelectedChipValues<String>(
-            dialogView, R.id.chipGroupFilter5, mapOf(
+        currentSelectedFilter5 = getSelectedChipValues(
+            dialogView, mapOf(
                 R.id.chipFilter5Unknown to "-1",
                 R.id.chipFilter5Type1 to "1",
                 R.id.chipFilter5Type2 to "2",
@@ -280,7 +278,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun <T> getSelectedChipValues(
         dialogView: View,
-        chipGroupId: Int,
         chipMap: Map<Int, T>
     ): Set<T>? {
         val selectedValues = mutableSetOf<T>()

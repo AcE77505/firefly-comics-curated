@@ -1,3 +1,33 @@
 <resources>
+    <!-- 已有的字符串 -->
     <string name="app_name">流萤</string>
+    <string name="search_id_or_name">搜索ID或标题</string>
+    <string name="recommended">推荐</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="ai">ai</string>
+    <string name="apply">应用</string>
+    <string name="clear">清除</string>
+    <string name="censored_type">修正类型</string>
+    <string name="unknown">未知</string>
+    <string name="uncensored">无修正</string>
+    <string name="c_black_lines">黑线</string>
+    <string name="c_thin_blur">薄模糊</string>
+    <string name="c_thick_blur">厚模糊</string>
+    <string name="white">白色</string>
+    <string name="full_color">全彩</string>
+    <string name="chunai">纯爱</string>
+    <string name="tag">单人/男主/扶她/多人</string>
+    <string name="tag_1p">单人</string>
+    <string name="tag_cealus">男主</string>
+    <string name="tag_futa">扶她</string>
+    <string name="tag_3p_or_more">多人</string>
+
+    <string name="id_format">ID: %s</string>
+    <string name="ai_format">ai: %s</string>
+    <string name="censored_format">修正: %s</string>
+    <string name="full_color_format">全彩: %s</string>
+    <string name="chunai_format">纯爱: %s</string>
+    <string name="tag_format">tag: %s</string>
+    <string name="update_date_format">更新: %s</string>
 </resources>

@@ -5,7 +5,7 @@
         <item name="chipStandaloneStyle">@style/Widget.Firefly.Chip</item>
     </style>
 
-    <style name="Theme.流萤" parent="Base.Theme.流萤" />
+    <style name="Theme.Main" parent="Base.Theme.流萤" />
     <style name="Widget.Firefly.Chip" parent="Widget.Material3.Chip.Assist">
         <item name="chipStrokeColor">@color/chip_stroke_color</item>
         <item name="chipStrokeWidth">2dp</item>

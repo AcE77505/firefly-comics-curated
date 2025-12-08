@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,13 +14,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="搜索ID或标题" />
+                android:hint="@string/search_id_or_name" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="推荐"
+            android:text="@string/recommended"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -44,7 +44,7 @@
                 android:id="@+id/chipRecommendYes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="是"
+                android:text="@string/yes"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -53,7 +53,7 @@
                 android:id="@+id/chipRecommendNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="否"
+                android:text="@string/no"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -64,7 +64,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ai"
+            android:text="@string/ai"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -80,7 +80,7 @@
                 android:id="@+id/chipFilter1Yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="是"
+                android:text="@string/yes"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -89,7 +89,7 @@
                 android:id="@+id/chipFilter1No"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="否"
+                android:text="@string/no"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -100,7 +100,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="修正类型"
+            android:text="@string/censored_type"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -116,7 +116,7 @@
                 android:id="@+id/chipFilter2Unknown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="未知"
+                android:text="@string/unknown"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -125,7 +125,7 @@
                 android:id="@+id/chipFilter2None"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="无修正"
+                android:text="@string/uncensored"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -134,7 +134,7 @@
                 android:id="@+id/chipFilter2Light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="黑线"
+                android:text="@string/c_black_lines"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -143,7 +143,7 @@
                 android:id="@+id/chipFilter2Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="薄模糊"
+                android:text="@string/c_thin_blur"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -152,7 +152,7 @@
                 android:id="@+id/chipFilter2Heavy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="厚模糊"
+                android:text="@string/c_thick_blur"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -161,7 +161,7 @@
                 android:id="@+id/chipFilter2Complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="白色"
+                android:text="@string/white"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -172,7 +172,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="全彩"
+            android:text="@string/full_color"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -188,7 +188,7 @@
                 android:id="@+id/chipFilter3Unknown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="未知"
+                android:text="@string/unknown"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -197,7 +197,7 @@
                 android:id="@+id/chipFilter3Yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="是"
+                android:text="@string/yes"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -206,7 +206,7 @@
                 android:id="@+id/chipFilter3No"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="否"
+                android:text="@string/no"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -217,7 +217,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="纯爱"
+            android:text="@string/chunai"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -233,7 +233,7 @@
                 android:id="@+id/chipFilter4Unknown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="未知"
+                android:text="@string/unknown"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -242,7 +242,7 @@
                 android:id="@+id/chipFilter4Yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="是"
+                android:text="@string/yes"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -251,7 +251,7 @@
                 android:id="@+id/chipFilter4No"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="否"
+                android:text="@string/no"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -262,7 +262,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="单人/男主/扶她/多人"
+            android:text="@string/tag"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -271,14 +271,14 @@
             android:id="@+id/chipGroupFilter5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="8dp"
             app:singleSelection="false">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipFilter5Unknown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="未知"
+                android:text="@string/unknown"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -287,7 +287,7 @@
                 android:id="@+id/chipFilter5Type1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="单人"
+                android:text="@string/tag_1p"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -296,7 +296,7 @@
                 android:id="@+id/chipFilter5Type2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="男主"
+                android:text="@string/tag_cealus"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -305,7 +305,7 @@
                 android:id="@+id/chipFilter5Type3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="扶她"
+                android:text="@string/tag_futa"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -314,7 +314,7 @@
                 android:id="@+id/chipFilter5Type4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="多人"
+                android:text="@string/tag_3p_or_more"
                 android:checkable="true"
                 app:chipStrokeColor="@color/chip_stroke_green"
                 app:chipStrokeWidth="2dp" />
@@ -332,7 +332,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="清除"
+                android:text="@string/clear"
                 android:layout_marginEnd="8dp" />
 
             <Button
@@ -340,7 +340,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="应用"
+                android:text="@string/apply"
                 android:layout_marginStart="8dp" />
 
         </LinearLayout>

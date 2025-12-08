@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val repository: DataRepository) : ViewModel() {
 
     private val _allData = MutableStateFlow<List<FilterData>>(emptyList())
-    val allData: StateFlow<List<FilterData>> = _allData
 
     private val _filteredData = MutableStateFlow<List<FilterData>>(emptyList())
     val filteredData: StateFlow<List<FilterData>> = _filteredData

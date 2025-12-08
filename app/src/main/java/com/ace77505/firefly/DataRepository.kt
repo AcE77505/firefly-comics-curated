@@ -69,13 +69,12 @@ class DataRepository(private val context: Context) {
         var inQuotes = false
 
         for (i in line.indices) {
-            val c = line[i]
-            when {
-                c == '"' -> {
+            when (val c = line[i]) {
+                '"' -> {
                     inQuotes = !inQuotes
                     current.append(c) // 保留引号
                 }
-                c == ',' && !inQuotes -> {
+                ',' if !inQuotes -> {
                     result.add(current.toString())
                     current = StringBuilder()
                 }
