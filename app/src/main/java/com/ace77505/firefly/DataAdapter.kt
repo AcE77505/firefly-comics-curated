@@ -40,14 +40,14 @@ class DataAdapter(
 
         fun bind(data: FilterData) {
             currentData = data
-            tvId.text = context.getString(R.string.id_format, data.id)
+            tvId.text = data.id
             tvTitle.text = data.title
             tvFilter1.text = context.getString(R.string.ai_format, getFilter1DisplayValue(data.filter1))
             tvFilter2.text = context.getString(R.string.censored_format, getFilter2DisplayValue(data.filter2))
             tvFilter3.text = context.getString(R.string.full_color_format, getFilter3DisplayValue(data.filter3))
             tvFilter4.text = context.getString(R.string.chunai_format, getFilter4DisplayValue(data.filter4))
             tvFilter5.text = context.getString(R.string.tag_format, getFilter5DisplayValue(data.filter5))
-            tvUpdateDate.text = context.getString(R.string.update_date_format, data.updateDate)
+            tvUpdateDate.text = data.updateDate
         }
 
         private fun getFilter1DisplayValue(value: Int): String = when (value) {

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import androidx.core.net.toUri
+import android.content.res.Configuration
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,12 +35,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initViews()
-        setupRecyclerView()
-        setupViewModel()
-        setupToolbar()
-        setupClickListeners()
-        setupFilterDialogHelper()
+        initViews()                 // 1. 初始化视图
+        setupRecyclerView()         // 2. 设置列表
+        setupViewModel()            // 3. 设置 ViewModel
+        setupToolbar()              // 4. 设置 Toolbar
+        setupClickListeners()       // 5. 设置点击事件
+        setupFilterDialogHelper()   // 6. 设置筛选弹窗
+
+        val isNight = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK ==
+                Configuration.UI_MODE_NIGHT_YES
+        if (isNight) {
+            val nightColor = getColor(R.color.md_theme_dark_onSurface)
+            btnFilter.setTextColor(nightColor)
+            btnClearAll.setTextColor(nightColor)
+        }
     }
 
     private fun initViews() {

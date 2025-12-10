@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色：标题栏/背景纯黑 -->
+    <color name="md_theme_dark_primary">#000000</color>        <!-- 标题栏色 -->
+    <color name="md_theme_dark_onPrimary">#FFFFFF</color>      <!-- 标题文字 -->
+    <color name="md_theme_dark_surface">#000000</color>        <!-- 背景 -->
+
+    <!-- 新卡片容器色 -->
+    <color name="md_theme_dark_primaryContainer">#6A4C9C</color> <!-- 浅紫容器 -->
+    <color name="md_theme_dark_onPrimaryContainer">#FFFFFF</color> <!-- 卡片文字 -->
+</resources>

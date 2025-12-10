@@ -29,5 +29,4 @@
     <string name="full_color_format">全彩: %s</string>
     <string name="chunai_format">纯爱: %s</string>
     <string name="tag_format">tag: %s</string>
-    <string name="update_date_format">更新: %s</string>
 </resources>

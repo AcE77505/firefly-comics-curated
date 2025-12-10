@@ -1,16 +1,40 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.流萤" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="chipStyle">@style/Widget.Firefly.Chip</item>
-        <item name="chipStandaloneStyle">@style/Widget.Firefly.Chip</item>
+<resources>
+    <!-- 白天 -->
+    <style name="Base.Theme.Firefly" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- 顶部栏 -->
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+
+        <!-- 卡片容器色（浅紫） -->
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+
+        <!-- 背景/表面 -->
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="android:windowBackground">@color/md_theme_light_surface</item>
     </style>
 
-    <style name="Theme.Main" parent="Base.Theme.流萤" />
-    <style name="Widget.Firefly.Chip" parent="Widget.Material3.Chip.Assist">
-        <item name="chipStrokeColor">@color/chip_stroke_color</item>
-        <item name="chipStrokeWidth">2dp</item>
+    <!-- 黑夜 -->
+    <style name="Base.Theme.Firefly.Dark" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- 顶部栏 -->
+        <item name="colorPrimary">@color/md_theme_dark_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
+
+        <!-- 卡片容器色（深紫） -->
+        <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_dark_onPrimaryContainer</item>
+
+        <!-- 背景纯黑 -->
+        <item name="colorSurface">@color/md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/md_theme_dark_onSurface</item>
+        <item name="android:windowBackground">@color/md_theme_dark_surface</item>
+
+        <!-- 状态栏/导航栏也黑 -->
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
     </style>
 
-    <!-- Chip stroke color selector -->
-    <color name="chip_stroke_color">@color/chip_stroke_selector</color>
+    <style name="Theme.Firefly" parent="Base.Theme.Firefly" />
 </resources>
