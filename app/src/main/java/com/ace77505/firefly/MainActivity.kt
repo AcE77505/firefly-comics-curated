@@ -35,13 +35,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initViews()                 // 1. 初始化视图
-        setupRecyclerView()         // 2. 设置列表
-        setupViewModel()            // 3. 设置 ViewModel
-        setupToolbar()              // 4. 设置 Toolbar
-        setupClickListeners()       // 5. 设置点击事件
-        setupFilterDialogHelper()   // 6. 设置筛选弹窗
+        initViews()
+        setupRecyclerView()
+        setupViewModel()
+        setupToolbar()
+        setupClickListeners()
+        setupFilterDialogHelper()
 
+        // 暂时把设置按钮颜色代码放在MainActivity，后续需要移到别处
         val isNight = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK ==
                 Configuration.UI_MODE_NIGHT_YES
         if (isNight) {
