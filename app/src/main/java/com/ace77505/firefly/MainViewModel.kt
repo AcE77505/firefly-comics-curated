@@ -1,69 +1,98 @@
 // MainViewModel.kt
 package com.ace77505.firefly
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: DataRepository) : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val repository = DataRepository(application.applicationContext)
+
+    // 数据流
     private val _allData = MutableStateFlow<List<FilterData>>(emptyList())
-
     private val _filteredData = MutableStateFlow<List<FilterData>>(emptyList())
     val filteredData: StateFlow<List<FilterData>> = _filteredData
 
+    // 加载状态
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
+    // 筛选状态
+    private val _filterState = MutableStateFlow(FilterState())
+    val filterState: StateFlow<FilterState> = _filterState
+
+    // 结果数量
+    private val _resultCount = MutableStateFlow(0)
+    val resultCount: StateFlow<Int> = _resultCount
+
     init {
         loadData()
+        observeFilteredData()
     }
 
     private fun loadData() {
         viewModelScope.launch {
             _isLoading.value = true
-            val data = repository.loadDataFromAssets()
-            _allData.value = data
-            _filteredData.value = data
-            _isLoading.value = false
+            try {
+                val data = repository.loadDataFromAssets()
+                _allData.value = data
+                _filteredData.value = data // 初始显示所有数据
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 
-    fun applyFilters(
-        searchText: String = "",
-        selectedRecommend: Set<Int>? = null,
-        selectedFilter1: Set<Int>? = null,
-        selectedFilter2: Set<String>? = null,
-        selectedFilter3: Set<Int>? = null,
-        selectedFilter4: Set<Int>? = null,
-        selectedFilter5: Set<String>? = null
-    ) {
+    private fun observeFilteredData() {
         viewModelScope.launch {
-            val filtered = _allData.value.filter { data ->
+            _filteredData.collect { data ->
+                _resultCount.value = data.size
+            }
+        }
+    }
+
+    fun updateFilterState(newState: FilterState) {
+        _filterState.value = newState
+        applyFilters()
+    }
+
+    private fun applyFilters() {
+        viewModelScope.launch {
+            val state = _filterState.value
+            val allData = _allData.value
+
+            val filtered = allData.filter { data ->
                 // 文本搜索
-                val matchesSearch = searchText.isEmpty() ||
-                        data.id.contains(searchText, ignoreCase = true) ||
-                        data.title.contains(searchText, ignoreCase = true)
+                val matchesSearch = state.searchText.isEmpty() ||
+                        data.id.contains(state.searchText, ignoreCase = true) ||
+                        data.title.contains(state.searchText, ignoreCase = true)
 
                 // 筛选条件
                 val matchesFilter = data.matchesFilter(
-                    selectedRecommend,
-                    selectedFilter1,
-                    selectedFilter2,
-                    selectedFilter3,
-                    selectedFilter4,
-                    selectedFilter5
+                    state.selectedRecommend,
+                    state.selectedFilter1,
+                    state.selectedFilter2,
+                    state.selectedFilter3,
+                    state.selectedFilter4,
+                    state.selectedFilter5
                 )
 
                 matchesSearch && matchesFilter
             }
+
             _filteredData.value = filtered
         }
     }
 
     fun clearFilters() {
+        _filterState.update { it.clear(); it }
         _filteredData.value = _allData.value
     }
 }
