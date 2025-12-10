@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!-- 统一的MaterialToolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:minHeight="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:titleTextColor="?attr/colorOnPrimary"
@@ -67,4 +68,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone" />
+
 </LinearLayout>

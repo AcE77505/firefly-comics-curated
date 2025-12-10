@@ -1,4 +1,3 @@
-// MainViewModel.kt
 package com.ace77505.firefly
 
 import android.app.Application

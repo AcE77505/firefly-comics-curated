@@ -3,6 +3,10 @@
     <!-- 品牌色 -->
     <color name="seed">#6750A4</color>
 
+    <color name="settings_background">?attr/colorSurface</color>
+    <color name="settings_text_color">?attr/colorOnSurface</color>
+    <color name="settings_hint_color">@android:color/darker_gray</color>
+
     <!-- ===== 浅色 ===== -->
     <color name="md_theme_light_primary">#6750A4</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>

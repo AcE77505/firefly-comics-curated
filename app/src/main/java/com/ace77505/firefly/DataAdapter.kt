@@ -1,4 +1,3 @@
-// DataAdapter.kt
 package com.ace77505.firefly
 
 import android.content.Context

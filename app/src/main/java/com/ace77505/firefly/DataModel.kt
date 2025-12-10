@@ -1,4 +1,3 @@
-// DataModel.kt
 package com.ace77505.firefly
 
 data class FilterData(
