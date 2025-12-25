@@ -28,6 +28,10 @@ android {
                 storePassword = properties.getProperty("STORE_PASSWORD")
                 keyAlias = properties.getProperty("KEY_ALIAS")
                 keyPassword = properties.getProperty("KEY_PASSWORD")
+
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
             }
         }
     }
