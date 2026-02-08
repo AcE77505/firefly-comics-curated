@@ -62,7 +62,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                             dataList.add(data)
                         } else {
                             // 打印有问题的行以便调试
-                            println("Invalid CSV line (expected 10 columns, got ${'$'}{values.size}): ${'$'}line")
+                            println($$"Invalid CSV line (expected 10 columns, got ${values.size}): $line")
                         }
                     }
                 }
@@ -71,7 +71,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             // 打印加载的数据数量用于调试
-            println("Loaded ${'$'}{dataList.size} records from CSV")
+            println($$"Loaded ${dataList.size} records from CSV")
 
             return dataList
         }

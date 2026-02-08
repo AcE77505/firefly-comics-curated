@@ -14,6 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import androidx.core.net.toUri
@@ -44,6 +46,17 @@ class MainActivity : BaseActivity() {
     private lateinit var tvResultCount: TextView
     private lateinit var btnFilter: Button
     private lateinit var btnClearAll: Button
+
+    // Diff callback moved out of inner class to avoid 'companion object prohibited here' error
+    private val diffcallback = object : DiffUtil.ItemCallback<FilterData>() {
+        override fun areItemsTheSame(oldItem: FilterData, newItem: FilterData): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: FilterData, newItem: FilterData): Boolean {
+            return oldItem == newItem
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +100,8 @@ class MainActivity : BaseActivity() {
 
         lifecycleScope.launch {
             viewModel.filteredData.collectLatest { data ->
-                adapter.updateData(data)
+                // 用 ListAdapter 的 submitList 替换 notifyDataSetChanged
+                adapter.submitList(data)
             }
         }
 
@@ -176,14 +190,12 @@ class MainActivity : BaseActivity() {
             val url = "https://jm18c-ghj.cc/album/$id"
             val intent = Intent(Intent.ACTION_VIEW, url.toUri())
 
-            if (intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "未找到可用的浏览器应用", Toast.LENGTH_SHORT).show()
-            }
+            // 使用 chooser 更稳妥（并且 manifest 中已经添加了 <queries>）
+            val chooser = Intent.createChooser(intent, null)
+            startActivity(chooser)
         } catch (e: Exception) {
             e.printStackTrace()
-            Toast.makeText(this, "打开链接失败", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "未找到可用的浏览器应用", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -191,11 +203,11 @@ class MainActivity : BaseActivity() {
         val isNight = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK ==
                 android.content.res.Configuration.UI_MODE_NIGHT_YES
         if (isNight) {
-            val nightColor = getColor(R.color.md_theme_dark_onSurface)
+            val nightColor = ContextCompat.getColor(this, R.color.md_theme_dark_onSurface)
             btnFilter.setTextColor(nightColor)
             btnClearAll.setTextColor(nightColor)
         } else {
-            val lightColor = getColor(R.color.md_theme_light_onSurface)
+            val lightColor = ContextCompat.getColor(this, R.color.md_theme_light_onSurface)
             btnFilter.setTextColor(lightColor)
             btnClearAll.setTextColor(lightColor)
         }
@@ -207,9 +219,8 @@ class MainActivity : BaseActivity() {
     }
 
     inner class DataAdapter(
-        private var dataList: List<FilterData> = emptyList(),
         private val onItemClick: (FilterData) -> Unit
-    ) : RecyclerView.Adapter<DataAdapter.ViewHolder>() {
+    ) : ListAdapter<FilterData, DataAdapter.ViewHolder>(diffcallback) {
 
         inner class ViewHolder(
             itemView: View,
@@ -321,14 +332,8 @@ class MainActivity : BaseActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.bind(dataList[position])
-        }
-
-        override fun getItemCount(): Int = dataList.size
-
-        fun updateData(newData: List<FilterData>) {
-            dataList = newData
-            notifyDataSetChanged()
+            val item = getItem(position)
+            holder.bind(item)
         }
     }
 
@@ -351,49 +356,49 @@ class MainActivity : BaseActivity() {
 
         private fun getPrimaryColor(): Int {
             return if (isDarkMode) {
-                activity.getColor(R.color.md_theme_dark_primary)
+                ContextCompat.getColor(activity, R.color.md_theme_dark_primary)
             } else {
-                activity.getColor(R.color.md_theme_light_primary)
+                ContextCompat.getColor(activity, R.color.md_theme_light_primary)
             }
         }
 
         private fun getOnPrimaryColor(): Int {
             return if (isDarkMode) {
-                activity.getColor(R.color.md_theme_dark_onPrimary)
+                ContextCompat.getColor(activity, R.color.md_theme_dark_onPrimary)
             } else {
-                activity.getColor(R.color.md_theme_light_onPrimary)
+                ContextCompat.getColor(activity, R.color.md_theme_light_onPrimary)
             }
         }
 
         private fun getSurfaceColor(): Int {
             return if (isDarkMode) {
-                activity.getColor(R.color.md_theme_dark_surface)
+                ContextCompat.getColor(activity, R.color.md_theme_dark_surface)
             } else {
-                activity.getColor(R.color.md_theme_light_surface)
+                ContextCompat.getColor(activity, R.color.md_theme_light_surface)
             }
         }
 
         private fun getOnSurfaceColor(): Int {
             return if (isDarkMode) {
-                activity.getColor(R.color.md_theme_dark_onSurface)
+                ContextCompat.getColor(activity, R.color.md_theme_dark_onSurface)
             } else {
-                activity.getColor(R.color.md_theme_light_onSurface)
+                ContextCompat.getColor(activity, R.color.md_theme_light_onSurface)
             }
         }
 
         private fun getPrimaryContainerColor(): Int {
             return if (isDarkMode) {
-                activity.getColor(R.color.md_theme_dark_primaryContainer)
+                ContextCompat.getColor(activity, R.color.md_theme_dark_primaryContainer)
             } else {
-                activity.getColor(R.color.md_theme_light_primaryContainer)
+                ContextCompat.getColor(activity, R.color.md_theme_light_primaryContainer)
             }
         }
 
         private fun getOnPrimaryContainerColor(): Int {
             return if (isDarkMode) {
-                activity.getColor(R.color.md_theme_dark_onPrimaryContainer)
+                ContextCompat.getColor(activity, R.color.md_theme_dark_onPrimaryContainer)
             } else {
-                activity.getColor(R.color.md_theme_light_onPrimaryContainer)
+                ContextCompat.getColor(activity, R.color.md_theme_light_onPrimaryContainer)
             }
         }
 
@@ -731,8 +736,8 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        private fun createSpacer(height: Int): android.view.View {
-            return android.view.View(activity).apply {
+        private fun createSpacer(height: Int): View {
+            return View(activity).apply {
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     height
