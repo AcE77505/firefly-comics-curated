@@ -1,8 +1,10 @@
 package com.ace77505.firefly
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -186,15 +188,18 @@ class MainActivity : BaseActivity() {
     }
 
     private fun openUrlInBrowser(id: String) {
+        val url = "https://jm18c-ghj.cc/album/$id"
         try {
-            val url = "https://jm18c-ghj.cc/album/$id"
             val intent = Intent(Intent.ACTION_VIEW, url.toUri())
 
-            // 使用 chooser 更稳妥（并且 manifest 中已经添加了 <queries>）
-            val chooser = Intent.createChooser(intent, null)
-            startActivity(chooser)
+            // 直接 startActivity — Android 12+ 上系统会用自己的包解析能力找到浏览器
+            // 不需要 createChooser()，后者在 Android 12+ 上会受到包可见性过滤影响
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Log.e("MainActivity", "未找到可用的浏览器应用，URL: $url", e)
+            Toast.makeText(this, "未找到可用的浏览器应用", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("MainActivity", "打开浏览器时发生未知错误", e)
             Toast.makeText(this, "未找到可用的浏览器应用", Toast.LENGTH_SHORT).show()
         }
     }
